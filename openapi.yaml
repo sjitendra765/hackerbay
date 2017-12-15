@@ -1,0 +1,129 @@
+swagger: "2.0"
+info:
+  version: "0.0.1"
+  title: simple Api
+# during dev, should point to your local machine
+
+# basePath prefixes all resource paths 
+basePath: "/"
+# 
+schemes:
+  # tip: remove http to make production-grade
+  - http
+  - https
+# format of bodies a client can send (Content-Type)
+consumes:
+  - application/json
+# format of the responses to the client (Accepts)
+produces:
+  - application/json
+
+paths:
+  /login :
+    post:      
+      tags:
+      - "Log in"
+      description: "Enter any username and password"
+      parameters:
+      - name: "login"
+        in: body
+        required: true
+        schema:
+          $ref: "#/definitions/Login"
+      responses: 
+        "200":
+          description: Success
+          schema: 
+            $ref: "#/definitions/GeneralResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /jsonpatch :
+    post:      
+      tags:
+      - "Json Patch"
+      description: "edit,replace or add in json"
+      parameters:
+      - name: "jsonpatch"
+        in: body
+        required: true
+        schema:
+          $ref: "#/definitions/JsonPatch"
+      responses: 
+        "200":
+          description: Success
+          schema: 
+            $ref: "#/definitions/GeneralResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /thumbnail:
+    post:
+      tags:
+      - "Upload a thumnail pic"
+      description: "upload a thumbnail picture"
+      consumes:
+        - multipart/form-data
+      parameters:
+      - in: formData
+        name: thumbnail
+        type: file
+        required: true
+      responses: 
+        "200":
+          description: Thumnail image in PNG format
+          schema:
+            $ref: "#/definitions/ImageResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+definitions:
+  ImageResponse:
+    type: string
+    format: binary
+  ErrorResponse:
+    required:
+      - message
+    properties:
+      message:
+        type: object
+  GeneralResponse:
+    type: object
+    properties:
+      success:
+        type: object
+    required:
+      - success
+  JsonPatch:
+    required:
+      - mydoc
+      - thepatch
+    properties:
+      mydoc:
+        type: object
+      thepatch:
+        $ref: '#/definitions/ThaPatch'
+  ThaPatch:
+    required:
+      - op
+      - path
+      - value
+    properties:
+      op:
+        type: string
+      path:
+        type: string
+      value:
+        type: string
+  Login:
+    required:
+      - username
+      - password
+    properties:
+      username:
+        type: string
+      password:
+        type: string

@@ -1,0 +1,40 @@
+{
+  "name": "cloudboost",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index",
+    "test": "istanbul cover _mocha",
+    "lint": "jshint **.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "cors": "^2.8.4",
+    "crypto": "0.0.3",
+    "express": "^4.14.0",
+    "fs": "0.0.1-security",
+    "gm": "^1.23.0",
+    "jshint": "^2.9.5",
+    "jsonpatch": "^3.0.1",
+    "jsonwebtoken": "^7.2.1",
+    "morgan": "^1.7.0",
+    "multer": "^1.2.1",
+    "nodemon": "^1.11.0",
+    "passport": "^0.3.2",
+    "passport-jwt": "^2.2.1",
+    "passport-local": "^1.0.0",
+    "swagger-tools": "^0.10.1",
+    "swagger-ui": "^3.6.1",
+    "winston": "^2.4.0",
+    "yamljs": "^0.3.0"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "chai-http": "^3.0.0",
+    "istanbul": "^0.4.5",
+    "mocha": "^4.0.1"
+  }
+}
